@@ -20,6 +20,7 @@ class PaginaInicial extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.amber,
         onPressed: () { 
+          Navigator.pop(context);
           Navigator.push(
             context, 
             MaterialPageRoute(
