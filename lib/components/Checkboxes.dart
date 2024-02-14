@@ -1,23 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:pr3/data/BaseDatos.dart';
 
-class Checkboxes extends StatelessWidget {
-  
-  List<bool> _isCheckedList = List.generate(30, (index) => false);
+class Checkboxes extends StatefulWidget {
 
-   Checkboxes({super.key});
+   Checkboxes({super.key,});
 
   @override
+  State<Checkboxes> createState() => _CheckboxesState();
+}
+
+class _CheckboxesState extends State<Checkboxes> {
+  final _boxDeHive = Hive.box("gym");
+  BaseDeDades bd = BaseDeDades();
+   List<bool> _isCheckedList = List.generate(30, (index) => false);
+  
+
+  @override
+   void initState(){
+    
+    if(_boxDeHive.get("gym") == null){
+      
+      bd.crearDadesInicials();
+    }else{
+       bd.carregarDades();
+    }
+
+    super.initState();
+  }
+  
   Widget build(BuildContext context) {
     return GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 7,
         ),
-        itemCount: 30,
+        
+        itemCount: _isCheckedList.length,
         itemBuilder: (context, index) {
           return CheckboxListTile(
-            title: Text("Dia 1"),
+            title: Text("Dia"),
             value: _isCheckedList[index],
-            onChanged: 
+            onChanged: (bool? value){
+              setState(() {
+                _isCheckedList[index] = value!;
+                if(value!){
+                  bd.sumaDades();
+                  bd.actualitzarDades();
+                }else{
+                  bd.restarDades();
+                  bd.actualitzarDades();
+                }
+              });
+            },
           );
         },
       );

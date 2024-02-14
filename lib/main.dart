@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pr3/pagines/pagina_inicial.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
+  var gym = await Hive.openBox("gym");
   runApp(const Aplicacio());
 }
 

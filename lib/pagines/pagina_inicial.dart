@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:pr3/data/BaseDatos.dart';
 import 'package:pr3/pagines/pagina1.dart';
 
 class PaginaInicial extends StatelessWidget {
-  const PaginaInicial({super.key});
+
+   final _boxDeHive = Hive.box("gym");
+   BaseDeDades bd = BaseDeDades();
+
+   PaginaInicial({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +35,8 @@ class PaginaInicial extends StatelessWidget {
           );
         },
         child: Text("Ir"),
+
+        
       ),
     );
   }
