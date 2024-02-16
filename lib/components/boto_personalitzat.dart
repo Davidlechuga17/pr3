@@ -21,6 +21,7 @@ class _BotoPersonalitzatState extends State<BotoPersonalitzat> {
     if(_boxDeHive.get("gym") == null){
       
       bd.crearDadesInicials();
+      
     }else{
        bd.carregarDades();
     }

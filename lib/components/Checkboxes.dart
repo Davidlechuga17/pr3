@@ -13,8 +13,7 @@ class Checkboxes extends StatefulWidget {
 class _CheckboxesState extends State<Checkboxes> {
   final _boxDeHive = Hive.box("gym");
   BaseDeDades bd = BaseDeDades();
-   List<bool> _isCheckedList = List.generate(30, (index) => false);
-  
+   final List<bool> _isCheckedList = List.generate(30, (index) => false);
 
   @override
    void initState(){
@@ -40,16 +39,17 @@ class _CheckboxesState extends State<Checkboxes> {
           return CheckboxListTile(
             title: Text("Dia"),
             value: _isCheckedList[index],
-            onChanged: (bool? value){
+            onChanged: (newValue){
               setState(() {
-                _isCheckedList[index] = value!;
-                if(value!){
+                _isCheckedList[index] = newValue!;
+                if(newValue){
                   bd.sumaDades();
-                  bd.actualitzarDades();
+                  
                 }else{
                   bd.restarDades();
-                  bd.actualitzarDades();
+                  
                 }
+                bd.actualitzarDades();
               });
             },
           );

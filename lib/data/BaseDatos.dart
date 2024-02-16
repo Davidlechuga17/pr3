@@ -6,7 +6,7 @@ class BaseDeDades {
   final _boxDeHive = Hive.box("gym");
 
   void crearDadesInicials(){
-    num;
+    num = 0;
   }
 
   void sumaDades(){
